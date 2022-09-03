@@ -262,3 +262,37 @@ function addEmployee() {
 }
 
 // Update Database Options //
+
+// Update Role of an Employee
+function updateRole() {
+  figlet("UPDATE ROLES", function (err, res) {
+    if (err) {
+      console.log("That didn't work...");
+      console.dir(err);
+      return;
+    }
+    console.log(res);
+  });
+
+  db.query('SELECT * FROM employee', (err, res) => {
+    console.table(res);
+  })
+  inquirer.prompt([
+    {
+      type: "number",
+      message: "Enter the ID number of the employee you want to update",
+      name: "employee_id"
+    },
+    {
+      type: "number",
+      message: "Please enter their new ID number",
+      name: "roleId"
+    }
+  ]).then (res => {
+    db.query("UPDATE employee SET role_id = ? WHERE id = ?", [res.roleId, res.employee_id], (err, res) => {
+      if (err) throw err;
+      console.log("Employee Role Has Been Updated")
+      trackerInit()
+    })
+  })
+};
