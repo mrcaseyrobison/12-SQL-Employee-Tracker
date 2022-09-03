@@ -164,6 +164,7 @@ function addDepartment() {
     });
 }
 
+// Add a Role
 function addRole() {
     figlet("ADD A ROLE", function(err, res) {
         if (err) {
@@ -187,9 +188,10 @@ function addRole() {
         },
         {
             type: "number",
-            messages: "Please enter the ID number for this new role",
+            message: "Please enter the ID number for this new role",
             name: "dept_id"
         }
+    
     ])
     .then(res => {
         db.query("INSERT INTO role (title, salary, department_id) values (?,?,?)", [res.role, res.salary, res.dept_id], (err, res) => {
@@ -199,3 +201,47 @@ function addRole() {
         }) 
     });
 };
+
+// Add an Employee
+function addEmployee() {
+    figlet("ADD AN EMPLOYEE", function(err, res) {
+        if (err) {
+            console.log("That didn't work...");
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    });
+
+    inquirer.prompt ([
+        {
+            type: "input",
+            message: "Please enter the first name of the new employee",
+            name: "first_name"
+        },
+        {
+            type: "input",
+            message: "Please enter the last name of the new employee",
+            name: "last_name"
+        },
+        {
+            type: "number",
+            message: "Please enter the ID number for this new employee",
+            name: "roleid"
+        },
+        {
+            type: "number",
+            message: "Please enter the ID of the manager for this new employee",
+            name: "manager_id"
+        }
+    
+    ])
+    .then(res => {
+        db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES(?,?,?,?)",
+        [res.first_name, res.last_name, res.roleid, res.manager_id], (err, res) => {
+            if (err) throw err;
+            console.log("This employee has been added");
+            trackerInit()
+        }) 
+    });
+}
