@@ -45,7 +45,34 @@ function trackerInit() {
             "Delete Options"
         ]
     }).then(function (answers)  {
-        
-    })
-
-}
+        switch (answers.menu) {
+            case "View All Departments":
+                viewDepartments();
+                break;
+            case "View All Roles":
+                viewRoles();
+                break;
+            case "View All Employees":
+                viewEmployees();
+                break;
+            case "Add a Department":
+                addDepartment();
+                break;
+            case "Add a Role":
+                addRole();
+                break;
+            case "Add an Employee":
+                addEmployee();
+                break;
+            case "Update a Role":
+                updateRole();
+                break;
+            case "Update a Manager":
+                updateManager();
+                break;
+            case "Delete Options":
+                deleteOptions();
+                break;    
+        }
+    });
+};
