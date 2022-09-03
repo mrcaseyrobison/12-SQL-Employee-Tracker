@@ -1,0 +1,28 @@
+{
+  "name": "12-sql-employee-tracker",
+  "version": "1.0.0",
+  "description": "An app utilizing NODE and SQL to track employees through the terminal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Errn or: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrcaseyrobison/12-SQL-Employee-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrcaseyrobison/12-SQL-Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/mrcaseyrobison/12-SQL-Employee-Tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "dotenv": "^16.0.2",
+    "inquirer": "8.2.4",
+    "mysql2": "^2.2.5",
+    "figlet": "^1.5.2"
+  }
+}
