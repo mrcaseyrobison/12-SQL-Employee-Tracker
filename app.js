@@ -263,7 +263,7 @@ function addEmployee() {
 
 // Update Database Options //
 
-// Update Role of an Employee
+// Update Role of an Employee //
 function updateRole() {
   figlet("UPDATE ROLES", function (err, res) {
     if (err) {
@@ -285,7 +285,7 @@ function updateRole() {
     },
     {
       type: "number",
-      message: "Please enter their new ID number",
+      message: "Enter their new ID number",
       name: "roleId"
     }
   ]).then (res => {
@@ -296,3 +296,38 @@ function updateRole() {
     })
   })
 };
+
+// Update Manager //
+function updateManager() {
+  figlet("UPDATE MANAGER", function (err, res) {
+    if (err) {
+      console.log("That didn't work...");
+      console.dir(err);
+      return;
+    }
+    console.log(res);
+  });
+
+  db.query("SELECT * FROM employee", (err, res) => {
+    console.table(res);
+  })
+  inquirer.prompt([
+    {
+      type: "number",
+      message: "Choose any employee number to update their manager",
+      name: "employeeId"
+    },
+    {
+      type: "number",
+      message: "Assign the new manager ID number",
+      name: "managerId"
+    }
+  ]).then(res => {
+    db.query("UPDATE employee SET manager_id = ? WHERE id = ?", [res.managerId, res.employeeId],
+    (err, res) => {
+      if (err) throw err;
+      console.log ("Employee has been assigned a new Manager");
+      trackerInit();
+    })
+  })
+}
