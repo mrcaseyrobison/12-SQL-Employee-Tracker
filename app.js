@@ -98,5 +98,19 @@ function viewDepartments() {
 };
 
 function viewRoles() {
-    figlet("ROLES", function(err, res))
-}
+    figlet("ROLES", function(err, res) {
+        if (err) {
+            console.log("That didn't work...");
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    });
+    
+    const query = ("SELECT * FROM roles");
+    db.query(query, function (err, res) {
+        console.table(res);
+        trackerInit();
+    });
+};
+
