@@ -3,7 +3,7 @@ const mysql = require ("mysql2");
 const inquirer = require ("inquirer");
 const figlet = require ("figlet");
 require("dotenv").config();
-const cTable = require ("console.table");
+// const cTable = require ("console.table");
 
 // Connect to mysql database
 const db = mysql.createConnection({
@@ -19,6 +19,7 @@ db.connect(function (err) {
     trackerInit();
 })
 
+// Figlet renders EMPLOYEE TRACKER in ASCII art
 figlet("EMPLOYEE TRACKER", function(err, res) {
     if (err) {
         console.log("That didn't work...");
@@ -76,3 +77,26 @@ function trackerInit() {
         }
     });
 };
+
+// User options
+
+function viewDepartments() {
+    figlet("DEPARTMENTS", function(err, res) {
+        if (err) {
+            console.log("That didn't work...");
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    });
+
+    const query = ("SELECT * FROM departments");
+    db.query(query, function (err, res) {
+        console.table(res);
+        trackerInit();
+    });
+};
+
+function viewRoles() {
+    figlet("ROLES", function(err, res))
+}
