@@ -331,3 +331,77 @@ function updateManager() {
     })
   })
 }
+
+// Delete from Database Options //
+
+function deleteOptions() {
+  figlet("REMOVE", function (err, res) {
+    if (err) {
+      console.log("That didn't work...");
+      console.dir(err);
+      return;
+    }
+    console.log(res);
+  });
+
+  inquirer.prompt([
+    {
+      type: "list",
+      message: "Please choose which item you would like to remove from the database",
+      choices: ["Department", "Role", "Employee"],
+      name: "delete_choice"
+    },
+  ]).then (res => {
+    if (res.delete_choice === "Employee") {
+      db.query("SELECT * FROM employee", (err, res) => {
+        console.table(res);
+        inquirer.prompt([
+          {
+            type: "number",
+            message: "Choose the employee ID number you want to remove",
+            name: "id_choice"
+          }
+        ]).then (res => {
+          db.query("DELETE FROM employee WHERE id = ?", res.id_choice, (err, res) => {
+            if (err) throw err;
+            console.log ("Employee has been removed")
+            trackerInit();
+          })
+        })
+      }
+      )} if (res.delete_choice === "Role") {
+        db.query("SELECT * FROM role", (err, res) => {
+          console.table(res);
+          inquirer.prompt([
+            {
+              type: "number",
+              message: "Please choose the role ID number you want to remove",
+              name: "id_choice"
+            }
+          ]).then (res => {
+            db.query("DELETE FROM role WHERE id = ?", res.id_choice, (err, res) => {
+              if (err) throw err;
+              console.log("Role has been removed")
+              trackerInit();
+            })
+          })
+        }
+        )} if (res.delete_choice === "Department") {
+          db.query("SELECT * FROM department", (err, res) => {
+            console.table(res);
+            inquirer.prompt([
+              {
+                type: "number",
+                message: "Please choose the Department ID you want to remove",
+                name: "id_choice"
+              }
+            ]).then (res => {
+              db.query("DELETE FROM department WHERE id = ?", res.id_choice, (err, res) => {
+                console.log("Department has been removed")
+                trackerInit();
+              })
+            })
+          })
+        }
+    })
+  }
