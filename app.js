@@ -43,7 +43,8 @@ function trackerInit() {
             "Add an Employee",
             "Update a Role",
             "Update a Manager",
-            "Delete Options"
+            "Delete Options",
+            "Exit Database"
         ]
     }).then(function (answers)  {
         switch (answers.menu) {
@@ -73,7 +74,9 @@ function trackerInit() {
                 break;
             case "Delete Options":
                 deleteOptions();
-                break;    
+                break;   
+            case "Exit Database":
+                db.end();
         }
     });
 };
