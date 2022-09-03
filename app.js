@@ -80,6 +80,7 @@ function trackerInit() {
 
 // User options
 
+// View Departments
 function viewDepartments() {
     figlet("DEPARTMENTS", function(err, res) {
         if (err) {
@@ -97,6 +98,7 @@ function viewDepartments() {
     });
 };
 
+// View Roles
 function viewRoles() {
     figlet("ROLES", function(err, res) {
         if (err) {
@@ -106,8 +108,26 @@ function viewRoles() {
         }
         console.log(res)
     });
-    
+
     const query = ("SELECT * FROM roles");
+    db.query(query, function (err, res) {
+        console.table(res);
+        trackerInit();
+    });
+};
+
+// View Employees
+function viewEmployees() {
+    figlet("EMPLOYEES", function(err, res) {
+        if (err) {
+            console.log("That didn't work...");
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    });
+
+    const query = ("SELECT * FROM employees");
     db.query(query, function (err, res) {
         console.table(res);
         trackerInit();
