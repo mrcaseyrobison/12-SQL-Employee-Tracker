@@ -161,3 +161,38 @@ function addDepartment() {
     });
 }
 
+function addRole() {
+    figlet("ADD A ROLE", function(err, res) {
+        if (err) {
+            console.log("That didn't work...");
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    });
+
+    inquirer.prompt ([
+        {
+            type: "input",
+            message: "Please enter the title of this new role",
+            name: "role"
+        },
+        {
+            type: "number",
+            message: "Please enter the salary for this new role",
+            name: "salary"
+        },
+        {
+            type: "number",
+            messages: "Please enter the ID number for this new role",
+            name: "dept_id"
+        }
+    ])
+    .then(res => {
+        db.query("INSERT INTO role (title, salary, department_id) values (?,?,?)", [res.role, res.salary, res.dept_id], (err, res) => {
+            if (err) throw err;
+            console.log("This role has been added");
+            trackerInit()
+        }) 
+    });
+};
