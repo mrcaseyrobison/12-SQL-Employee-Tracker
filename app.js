@@ -91,7 +91,7 @@ function viewDepartments() {
         console.log(res)
     });
 
-    const query = ("SELECT * FROM departments");
+    const query = ("SELECT * FROM department");
     db.query(query, function (err, res) {
         console.table(res);
         trackerInit();
@@ -109,7 +109,7 @@ function viewRoles() {
         console.log(res)
     });
 
-    const query = ("SELECT * FROM roles");
+    const query = ("SELECT * FROM role");
     db.query(query, function (err, res) {
         console.table(res);
         trackerInit();
@@ -127,10 +127,37 @@ function viewEmployees() {
         console.log(res)
     });
 
-    const query = ("SELECT * FROM employees");
+    const query = ("SELECT * FROM employee");
     db.query(query, function (err, res) {
         console.table(res);
         trackerInit();
     });
 };
+
+// Add a Department
+function addDepartment() {
+    figlet("ADD A DEPARTMENT", function(err, res) {
+        if (err) {
+            console.log("That didn't work...");
+            console.dir(err);
+            return;
+        }
+        console.log(res)
+    });
+
+    inquirer.prompt(
+        {
+            type: "input",
+            name: "department",
+            message: "What is the name of the new department?"
+        },
+    )
+    .then(res => {
+        db.query("INSERT INTO department SET ?", { name: res.department}, (err, res) => {
+            if (err) throw err;
+            console.log("Your department has been successfully added")
+            trackerInit();
+        });
+    });
+}
 

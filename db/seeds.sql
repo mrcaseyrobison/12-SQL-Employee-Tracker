@@ -1,5 +1,5 @@
 -- DEPARTMENT SEEDS --
-INSERT INTO departments (id, name)
+INSERT INTO department (id, name)
 VALUES  (1, "CEO"),
         (2, "Regional Management"),
         (3, "Branch Management"),
@@ -9,7 +9,7 @@ VALUES  (1, "CEO"),
         (7, "Human-Resources" );
 
 -- ROLE SEEDS --
-INSERT INTO roles (department_id, title, salary)
+INSERT INTO role (department_id, title, salary)
 VALUES  (1, "CEO", 200000),
         (2, "Regional Manager", 150000),
         (3, "Branch Manager", 130000),
@@ -24,7 +24,7 @@ VALUES  (1, "CEO", 200000),
         (7, "HR Consultant", 90000);
 
 -- EMPLOYEE SEEDS --
-INSERT INTO employees (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES  ("David", "Wallace", 1, null),
         ("Jan", "Levinson", 2,1),
         ("Michael", "Scott", 3, 2),
